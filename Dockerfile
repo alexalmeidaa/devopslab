@@ -1,6 +1,5 @@
-05-Docker
 # Nome do Workflow
-name: DevOpsLab Pipeline
+name: DevOpsLab
 
 # Evento que irá acionar a pipeline
 on:
