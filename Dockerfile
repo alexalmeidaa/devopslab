@@ -1,14 +1,20 @@
-# Use uma Imagem Official do Python
-FROM python:3
+# Nome do Workflow
+name: DevOpsLab Pipeline
 
-# Definindo o diretório onde a aplicação será armazenada
-WORKDIR /app
+# Evento que irá acionar a pipeline
+on:
+  push:
+    branches:
+      - main
 
-# Copiar os arquivos da pasta local para dentro do container
-COPY . /app
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download do Repositório
+        uses: actions/checkout@v4       # https://github.com/actions/checkout
 
-# Instalar as dependências de Python de acordo com o que foi desenvolvido na aplicação e que está declarado no arquivo requirements.txt.
-RUN pip install --trusted-host pypi.python.org -r requirements.txt
-
-# Garante que será iniciado a aplicação.
-CMD ["gunicorn", "app:app"] 
+      - name: Setup Python
+        uses: actions/setup-python@v5   # https://github.com/actions/setup-python
+        with:
+          python-version: '3.10'
