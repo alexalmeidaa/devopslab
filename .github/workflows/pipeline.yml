@@ -73,6 +73,9 @@ jobs:
       - name: Validando a API
         run: 'curl "${{ steps.deploy.outputs.url }}"'
 
+      - name: Install Requirements
+        run:  pip install flask flask-wtf
+
       # - name: Notificação Slack
       #   id: slack
       #   uses: slackapi/slack-github-action@v1.25.0
