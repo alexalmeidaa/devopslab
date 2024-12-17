@@ -1,4 +1,4 @@
 flask
 gunicorn
-flask-wtf
+flask_wtf
 
