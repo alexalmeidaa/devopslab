@@ -40,6 +40,10 @@ jobs:
           username: _json_key
           password: '${{ secrets.GOOGLE_CREDENTIALS }}'
 
+      - name: New Relic License
+        run: |
+          sed -i "s/licensekey/${{ secrets.NEW_RELIC_LICENSE_KEY }}/g" Dockerfile   
+
       - name: Build Image
         run: |
           docker build -t ${{ vars.GOOGLE_ARTIFACT }}/${{ vars.GOOGLE_PROJECT_ID }}/${{ vars.GOOGLE_REPONAME }}/${{ vars.GOOGLE_MYAPP }}:latest .
@@ -73,9 +77,7 @@ jobs:
       - name: Validando a API
         run: 'curl "${{ steps.deploy.outputs.url }}"'
 
-      - name: New Relic License
-        run: |
-          sed -i "s/licensekey/${{ secrets.NEW_RELIC_LICENSE_KEY }}/g" Dockerfile   
+
 
       - name: Notificação Slack
         id: slack
