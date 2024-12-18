@@ -73,6 +73,10 @@ jobs:
       - name: Validando a API
         run: 'curl "${{ steps.deploy.outputs.url }}"'
 
+      - name: New Relic License
+        run: |
+          sed -i "s/licensekey/${{ secrets.NEW_RELIC_LICENSE_KEY }}/g" Dockerfile   
+
       - name: Notificação Slack
         id: slack
         uses: slackapi/slack-github-action@v1.25.0
